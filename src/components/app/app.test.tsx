@@ -1,16 +1,23 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { store } from "../../store/store";
 import App from "./App";
+import { store } from "../../store/store";
+import { MemoryRouter } from "react-router-dom";
 
-test("renders learn react link", () => {
-  const { getByText } = render(
-    <Provider store={store}>
-      <App />
-    </Provider>
-  );
+describe("Given the App component", () => {
+  describe("When is renderized", () => {
+    test("Then it should renderize the home", () => {
+      render(
+        <Provider store={store}>
+          <MemoryRouter>
+            <App />
+          </MemoryRouter>
+        </Provider>
+      );
 
-  // eslint-disable-next-line testing-library/prefer-screen-queries
-  expect(getByText(/learn/i)).toBeInTheDocument();
+      const element2 = screen.getByText("RRSS");
+      expect(element2).toBeInTheDocument();
+    });
+  });
 });
